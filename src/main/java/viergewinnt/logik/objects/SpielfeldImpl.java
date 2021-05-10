@@ -9,12 +9,12 @@ import viergewinnt.logik.interfaces.Spielfeld;
 
 public class SpielfeldImpl implements Spielfeld {
 	
-	private static final int DEFAULT_REIHEN_ANZAHL = 5;
+	private static final int DEFAULT_REIHEN_ANZAHL    = 5;
 	private static final int DEFAULT_MAX_REIHEN_GRÖẞE = 5;
 	
 	
 	
-	private final int maxReihenGröße;
+	private final int              maxReihenGröße;
 	private final List <Spieler>[] reihen;
 	
 	
@@ -27,7 +27,7 @@ public class SpielfeldImpl implements Spielfeld {
 	public SpielfeldImpl(int reihenAnzahl, int maxReihenGröße) {
 		super();
 		this.maxReihenGröße = maxReihenGröße;
-		this.reihen = (List <Spieler>[]) new List[reihenAnzahl];
+		this.reihen = (List <Spieler>[]) new List <?>[reihenAnzahl];
 		for (int i = 0; i < reihen.length; i ++ ) {
 			reihen[i] = new ArrayList <Spieler>();
 		}
