@@ -163,7 +163,7 @@ class SpielfeldImplTest {
 				sf.steinEinwerfen(s1, ii);
 				fail("no exeption!");
 			} catch (RuntimeException re) {
-				if (re.getClass() != RuntimeException.class) fail(re);
+				if (re.getClass() != RuntimeException.class) fail("wrong exeption", re);
 			}
 		}
 		assertThrows(IndexOutOfBoundsException.class, () -> sf.steinEinwerfen(s1, reihenAnz));
