@@ -21,8 +21,8 @@ class SpielfeldImplTest {
 	void setUp() throws Exception {
 		sf = new SpielfeldImpl(REIHEN_ANZAHL, MAX_GRÖSSE);
 		//@formatter:off
-		s1 = new Spieler() { @Override public int zugMachen() { return 0; } };
-		s2 = new Spieler() { @Override public int zugMachen() { return 0; } };
+		s1 = new Spieler() { @Override public int zugMachen() { return -1; } };
+		s2 = new Spieler() { @Override public int zugMachen() { return -1; } };
 		//@formatter:on
 	}
 	
@@ -43,6 +43,274 @@ class SpielfeldImplTest {
 	@Disabled
 	void testSpielfeldImplIntInt() {
 		fail("Not yet implemented");
+	}
+	
+	@Test
+	void testErgebnis() {
+		sf.steinEinwerfen(s1, 0);
+		sf.steinEinwerfen(s2, 0);
+		sf.steinEinwerfen(s2, 0);
+		sf.steinEinwerfen(s1, 0);
+		sf.steinEinwerfen(s1, 0);
+		
+		sf.steinEinwerfen(s1, 1);
+		sf.steinEinwerfen(s2, 1);
+		sf.steinEinwerfen(s2, 1);
+		sf.steinEinwerfen(s1, 1);
+		sf.steinEinwerfen(s1, 1);
+		
+		sf.steinEinwerfen(s2, 2);
+		sf.steinEinwerfen(s1, 2);
+		sf.steinEinwerfen(s2, 2);
+		sf.steinEinwerfen(s1, 2);
+		sf.steinEinwerfen(s1, 2);
+		
+		sf.steinEinwerfen(s1, 3);
+		sf.steinEinwerfen(s1, 3);
+		sf.steinEinwerfen(s2, 3);
+		sf.steinEinwerfen(s1, 3);
+		sf.steinEinwerfen(s1, 3);
+		
+		sf.steinEinwerfen(s1, 4);
+		sf.steinEinwerfen(s2, 4);
+		sf.steinEinwerfen(s2, 4);
+		sf.steinEinwerfen(s1, 4);
+		sf.steinEinwerfen(s1, 4);
+		
+		assertNull(sf.ergebnis());
+		
+		sf = new SpielfeldImpl();
+		sf.steinEinwerfen(s1, 0);
+		sf.steinEinwerfen(s1, 0);
+		sf.steinEinwerfen(s1, 0);
+		sf.steinEinwerfen(s1, 0);
+		assertEquals(s1, sf.ergebnis());
+		
+		sf = new SpielfeldImpl();
+		sf.steinEinwerfen(s1, 0);
+		sf.steinEinwerfen(s1, 1);
+		sf.steinEinwerfen(s1, 2);
+		sf.steinEinwerfen(s1, 3);
+		assertEquals(s1, sf.ergebnis());
+		
+		sf = new SpielfeldImpl();
+		sf.steinEinwerfen(s1, 0);
+		
+		sf.steinEinwerfen(s2, 1);
+		sf.steinEinwerfen(s1, 1);
+		
+		sf.steinEinwerfen(s2, 2);
+		sf.steinEinwerfen(s2, 2);
+		sf.steinEinwerfen(s1, 2);
+		
+		sf.steinEinwerfen(s2, 3);
+		sf.steinEinwerfen(s2, 3);
+		sf.steinEinwerfen(s2, 3);
+		sf.steinEinwerfen(s1, 3);
+		assertEquals(s1, sf.ergebnis());
+		
+		sf = new SpielfeldImpl();
+		sf.steinEinwerfen(s2, 3);
+		
+		sf.steinEinwerfen(s2, 2);
+		sf.steinEinwerfen(s2, 2);
+		
+		sf.steinEinwerfen(s1, 1);
+		sf.steinEinwerfen(s1, 1);
+		sf.steinEinwerfen(s2, 1);
+		
+		sf.steinEinwerfen(s2, 0);
+		sf.steinEinwerfen(s1, 0);
+		sf.steinEinwerfen(s1, 0);
+		sf.steinEinwerfen(s2, 0);
+		assertEquals(s2, sf.ergebnis());
+		
+		sf = new SpielfeldImpl();
+		sf.steinEinwerfen(s2, 4);
+		sf.steinEinwerfen(s1, 4);
+		
+		sf.steinEinwerfen(s2, 3);
+		sf.steinEinwerfen(s2, 3);
+		sf.steinEinwerfen(s1, 3);
+		
+		sf.steinEinwerfen(s1, 1);
+		sf.steinEinwerfen(s2, 1);
+		sf.steinEinwerfen(s2, 1);
+		sf.steinEinwerfen(s1, 1);
+		
+		sf.steinEinwerfen(s2, 0);
+		sf.steinEinwerfen(s1, 0);
+		sf.steinEinwerfen(s2, 0);
+		sf.steinEinwerfen(s2, 0);
+		sf.steinEinwerfen(s1, 0);
+		assertEquals(s2, sf.ergebnis());
+	}
+	
+	@Test
+	void testFertigGespielt() {
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 0);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 0);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 0);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 0);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 0);
+		assertFalse(sf.fertigGespiel());
+		
+		sf.steinEinwerfen(s1, 1);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 1);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 1);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 1);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 1);
+		assertFalse(sf.fertigGespiel());
+		
+		sf.steinEinwerfen(s2, 2);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 2);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 2);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 2);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 2);
+		assertFalse(sf.fertigGespiel());
+		
+		sf.steinEinwerfen(s1, 3);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 3);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 3);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 3);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 3);
+		assertFalse(sf.fertigGespiel());
+		
+		sf.steinEinwerfen(s1, 4);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 4);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 4);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 4);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 4);
+		
+		assertTrue(sf.fertigGespiel());
+		
+		sf = new SpielfeldImpl();
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 0);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 0);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 0);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 0);
+		assertTrue(sf.fertigGespiel());
+		
+		sf = new SpielfeldImpl();
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 0);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 1);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 2);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 3);
+		assertTrue(sf.fertigGespiel());
+		
+		sf = new SpielfeldImpl();
+		sf.steinEinwerfen(s1, 0);
+		assertFalse(sf.fertigGespiel());
+		
+		sf.steinEinwerfen(s2, 1);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 1);
+		
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 2);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 2);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 2);
+		
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 3);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 3);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 3);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 3);
+		assertTrue(sf.fertigGespiel());
+		
+		sf = new SpielfeldImpl();
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 3);
+		
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 2);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 2);
+		
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 1);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 1);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 1);
+		
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 0);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 0);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 0);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 0);
+		assertTrue(sf.fertigGespiel());
+		
+		sf = new SpielfeldImpl();
+		sf.steinEinwerfen(s2, 4);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 4);
+		assertFalse(sf.fertigGespiel());
+		
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 3);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 3);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 3);
+		assertFalse(sf.fertigGespiel());
+		
+		sf.steinEinwerfen(s1, 1);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 1);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 1);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 1);
+		assertFalse(sf.fertigGespiel());
+		
+		sf.steinEinwerfen(s2, 0);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 0);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 0);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s2, 0);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(s1, 0);
+		assertTrue(sf.fertigGespiel());
 	}
 	
 	@Test
