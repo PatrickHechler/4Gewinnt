@@ -43,4 +43,16 @@ public class SpielfeldImpl implements Spielfeld {
 		else throw new RuntimeException("bereits die maximale größe erreicht: reihe=" + reihe + " reihen[reihe]=" + dieseReihe + " maxReihenGröße=" + maxReihenGröße);
 	}
 	
+	@Override
+	public boolean fertigGespiel() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
+	public Spieler ergebnis() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }
