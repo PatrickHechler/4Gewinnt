@@ -11,11 +11,11 @@ import viergewinnt.logik.interfaces.Spielfeld;
 class SpielfeldImplTest {
 	
 	static final int REIHEN_ANZAHL = 5;
-	static final int MAX_GRÖSSE    = 5;
+	static final int MAX_GRÖSSE = 5;
 	
 	Spielfeld sf;
-	Spieler   s1;
-	Spieler   s2;
+	Spieler s1;
+	Spieler s2;
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -34,48 +34,36 @@ class SpielfeldImplTest {
 	}
 	
 	@Test
-	@Disabled
-	void testSpielfeldImpl() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	@Disabled
-	void testSpielfeldImplIntInt() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
 	void testErgebnis() {
-		sf.steinEinwerfen(s1, 0);
-		sf.steinEinwerfen(s2, 0);
-		sf.steinEinwerfen(s2, 0);
-		sf.steinEinwerfen(s1, 0);
-		sf.steinEinwerfen(s1, 0);
+		sf.steinEinwerfen(newSpieler(), 0);
+		sf.steinEinwerfen(newSpieler(), 0);
+		sf.steinEinwerfen(newSpieler(), 0);
+		sf.steinEinwerfen(newSpieler(), 0);
+		sf.steinEinwerfen(newSpieler(), 0);
 		
-		sf.steinEinwerfen(s1, 1);
-		sf.steinEinwerfen(s2, 1);
-		sf.steinEinwerfen(s2, 1);
-		sf.steinEinwerfen(s1, 1);
-		sf.steinEinwerfen(s1, 1);
+		sf.steinEinwerfen(newSpieler(), 1);
+		sf.steinEinwerfen(newSpieler(), 1);
+		sf.steinEinwerfen(newSpieler(), 1);
+		sf.steinEinwerfen(newSpieler(), 1);
+		sf.steinEinwerfen(newSpieler(), 1);
 		
-		sf.steinEinwerfen(s2, 2);
-		sf.steinEinwerfen(s1, 2);
-		sf.steinEinwerfen(s2, 2);
-		sf.steinEinwerfen(s1, 2);
-		sf.steinEinwerfen(s1, 2);
+		sf.steinEinwerfen(newSpieler(), 2);
+		sf.steinEinwerfen(newSpieler(), 2);
+		sf.steinEinwerfen(newSpieler(), 2);
+		sf.steinEinwerfen(newSpieler(), 2);
+		sf.steinEinwerfen(newSpieler(), 2);
 		
-		sf.steinEinwerfen(s1, 3);
-		sf.steinEinwerfen(s1, 3);
-		sf.steinEinwerfen(s2, 3);
-		sf.steinEinwerfen(s1, 3);
-		sf.steinEinwerfen(s1, 3);
+		sf.steinEinwerfen(newSpieler(), 3);
+		sf.steinEinwerfen(newSpieler(), 3);
+		sf.steinEinwerfen(newSpieler(), 3);
+		sf.steinEinwerfen(newSpieler(), 3);
+		sf.steinEinwerfen(newSpieler(), 3);
 		
-		sf.steinEinwerfen(s1, 4);
-		sf.steinEinwerfen(s2, 4);
-		sf.steinEinwerfen(s2, 4);
-		sf.steinEinwerfen(s1, 4);
-		sf.steinEinwerfen(s1, 4);
+		sf.steinEinwerfen(newSpieler(), 4);
+		sf.steinEinwerfen(newSpieler(), 4);
+		sf.steinEinwerfen(newSpieler(), 4);
+		sf.steinEinwerfen(newSpieler(), 4);
+		sf.steinEinwerfen(newSpieler(), 4);
 		
 		assertNull(sf.ergebnis());
 		
@@ -133,75 +121,81 @@ class SpielfeldImplTest {
 		sf.steinEinwerfen(s2, 3);
 		sf.steinEinwerfen(s1, 3);
 		
-		sf.steinEinwerfen(s1, 1);
-		sf.steinEinwerfen(s2, 1);
-		sf.steinEinwerfen(s2, 1);
-		sf.steinEinwerfen(s1, 1);
+		sf.steinEinwerfen(s1, 2);
+		sf.steinEinwerfen(s2, 2);
+		sf.steinEinwerfen(s2, 2);
+		sf.steinEinwerfen(s1, 2);
 		
-		sf.steinEinwerfen(s2, 0);
-		sf.steinEinwerfen(s1, 0);
-		sf.steinEinwerfen(s2, 0);
-		sf.steinEinwerfen(s2, 0);
-		sf.steinEinwerfen(s1, 0);
+		sf.steinEinwerfen(s2, 1);
+		sf.steinEinwerfen(s1, 1);
+		sf.steinEinwerfen(s2, 1);
+		sf.steinEinwerfen(s2, 1);
+		sf.steinEinwerfen(s1, 1);
 		assertEquals(s2, sf.ergebnis());
 	}
+	
+	//@formatter:off
+	private Spieler newSpieler() {
+		return new Spieler() { @Override public int zugMachen() { return 0; } };
+	}
+	//@formatter:on
 	
 	@Test
 	void testFertigGespielt() {
 		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s1, 0);
+		sf.steinEinwerfen(newSpieler(), 0);
 		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s2, 0);
+		sf.steinEinwerfen(newSpieler(), 0);
 		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s2, 0);
+		sf.steinEinwerfen(newSpieler(), 0);
 		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s1, 0);
+		sf.steinEinwerfen(newSpieler(), 0);
 		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s1, 0);
-		assertFalse(sf.fertigGespiel());
-		
-		sf.steinEinwerfen(s1, 1);
-		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s2, 1);
-		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s2, 1);
-		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s1, 1);
-		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s1, 1);
+		sf.steinEinwerfen(newSpieler(), 0);
 		assertFalse(sf.fertigGespiel());
 		
-		sf.steinEinwerfen(s2, 2);
+		sf.steinEinwerfen(newSpieler(), 1);
 		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s1, 2);
+		sf.steinEinwerfen(newSpieler(), 1);
 		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s2, 2);
+		sf.steinEinwerfen(newSpieler(), 1);
 		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s1, 2);
+		sf.steinEinwerfen(newSpieler(), 1);
 		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s1, 2);
-		assertFalse(sf.fertigGespiel());
-		
-		sf.steinEinwerfen(s1, 3);
-		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s1, 3);
-		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s2, 3);
-		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s1, 3);
-		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s1, 3);
+		sf.steinEinwerfen(newSpieler(), 1);
 		assertFalse(sf.fertigGespiel());
 		
-		sf.steinEinwerfen(s1, 4);
+		sf.steinEinwerfen(newSpieler(), 2);
 		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s2, 4);
+		sf.steinEinwerfen(newSpieler(), 2);
 		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s2, 4);
+		sf.steinEinwerfen(newSpieler(), 2);
 		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s1, 4);
+		sf.steinEinwerfen(newSpieler(), 2);
 		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s1, 4);
+		sf.steinEinwerfen(newSpieler(), 2);
+		assertFalse(sf.fertigGespiel());
+		
+		sf.steinEinwerfen(newSpieler(), 3);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(newSpieler(), 3);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(newSpieler(), 3);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(newSpieler(), 3);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(newSpieler(), 3);
+		assertFalse(sf.fertigGespiel());
+		
+		sf.steinEinwerfen(newSpieler(), 4);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(newSpieler(), 4);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(newSpieler(), 4);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(newSpieler(), 4);
+		assertFalse(sf.fertigGespiel());
+		sf.steinEinwerfen(newSpieler(), 4);
 		
 		assertTrue(sf.fertigGespiel());
 		
@@ -292,24 +286,22 @@ class SpielfeldImplTest {
 		sf.steinEinwerfen(s1, 3);
 		assertFalse(sf.fertigGespiel());
 		
-		sf.steinEinwerfen(s1, 1);
+		sf.steinEinwerfen(s1, 2);
 		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s2, 1);
+		sf.steinEinwerfen(s2, 2);
 		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s2, 1);
+		sf.steinEinwerfen(s2, 2);
 		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s1, 1);
+		sf.steinEinwerfen(s1, 2);
 		assertFalse(sf.fertigGespiel());
 		
-		sf.steinEinwerfen(s2, 0);
+		sf.steinEinwerfen(s2, 1);
 		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s1, 0);
+		sf.steinEinwerfen(s1, 1);
 		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s2, 0);
+		sf.steinEinwerfen(s2, 1);
 		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s2, 0);
-		assertFalse(sf.fertigGespiel());
-		sf.steinEinwerfen(s1, 0);
+		sf.steinEinwerfen(s2, 1);
 		assertTrue(sf.fertigGespiel());
 	}
 	

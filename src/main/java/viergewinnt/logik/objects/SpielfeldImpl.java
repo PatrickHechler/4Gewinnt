@@ -9,12 +9,12 @@ import viergewinnt.logik.interfaces.Spielfeld;
 
 public class SpielfeldImpl implements Spielfeld {
 	
-	private static final int DEFAULT_REIHEN_ANZAHL    = 5;
+	private static final int DEFAULT_REIHEN_ANZAHL = 5;
 	private static final int DEFAULT_MAX_REIHEN_GRÖẞE = 5;
 	
 	
 	
-	private final int              maxReihenGröße;
+	private final int maxReihenGröße;
 	private final List <Spieler>[] reihen;
 	
 	
@@ -28,8 +28,8 @@ public class SpielfeldImpl implements Spielfeld {
 		super();
 		this.maxReihenGröße = maxReihenGröße;
 		this.reihen = (List <Spieler>[]) new List <?>[reihenAnzahl];
-		for (int i = 0; i < reihen.length; i ++ ) {
-			reihen[i] = new ArrayList <Spieler>();
+		for (int reihenIndex = 0; reihenIndex < reihen.length; reihenIndex ++ ) {
+			reihen[reihenIndex] = new ArrayList <Spieler>();
 		}
 	}
 	
@@ -45,13 +45,88 @@ public class SpielfeldImpl implements Spielfeld {
 	
 	@Override
 	public boolean fertigGespiel() {
-		// TODO Auto-generated method stub
-		return false;
+		if (ergebnis() != null) return true;
+		for (List <Spieler> dieseReihe : reihen) {
+			if (dieseReihe.size() < maxReihenGröße) return false;
+		}
+		return true;
 	}
 	
 	@Override
 	public Spieler ergebnis() {
-		// TODO Auto-generated method stub
+		for (List <Spieler> dieseReihe : reihen) {
+			int s = dieseReihe.size();
+			if (s >= 4) {
+				Spieler gewinner = dieseReihe.get(s - 1);
+				if (gewinner != dieseReihe.get(s - 2)) {
+					continue;
+				}
+				if (gewinner != dieseReihe.get(s - 3)) {
+					continue;
+				}
+				if (gewinner != dieseReihe.get(s - 4)) {
+					continue;
+				}
+				return gewinner;
+			}
+		}
+		for (int reihenIndex = 3; reihenIndex < reihen.length; reihenIndex ++ ) {
+			List <Spieler> dieseReihe = reihen[reihenIndex];
+			for (int gewinnerIndex = 3; gewinnerIndex < dieseReihe.size(); gewinnerIndex ++ ) {
+				Spieler gewinner = dieseReihe.get(gewinnerIndex);
+				List <Spieler> reihe = reihen[reihenIndex - 1];
+				if (reihe.size() <= gewinnerIndex - 1 || gewinner != reihe.get(gewinnerIndex - 1)) {
+					continue;
+				}
+				reihe = reihen[reihenIndex - 2];
+				if (reihe.size() <= gewinnerIndex - 2 || gewinner != reihe.get(gewinnerIndex - 2)) {
+					continue;
+				}
+				reihe = reihen[reihenIndex - 3];
+				if (reihe.size() <= gewinnerIndex - 3 || gewinner != reihe.get(gewinnerIndex - 3)) {
+					continue;
+				}
+				return gewinner;
+			}
+		}
+		for (int reihenIndex = 3; reihenIndex < reihen.length; reihenIndex ++ ) {
+			List <Spieler> dieseReihe = reihen[reihenIndex];
+			for (int gewinnerIndex = 0; gewinnerIndex < dieseReihe.size(); gewinnerIndex ++ ) {
+				Spieler gewinner = dieseReihe.get(gewinnerIndex);
+				List <Spieler> reihe = reihen[reihenIndex - 1];
+				if (reihe.size() <= gewinnerIndex + 1 || gewinner != reihe.get(gewinnerIndex + 1)) {
+					continue;
+				}
+				reihe = reihen[reihenIndex - 2];
+				if (reihe.size() <= gewinnerIndex + 2 || gewinner != reihe.get(gewinnerIndex + 2)) {
+					continue;
+				}
+				reihe = reihen[reihenIndex - 3];
+				if (reihe.size() <= gewinnerIndex + 3 || gewinner != reihe.get(gewinnerIndex + 3)) {
+					continue;
+				}
+				return gewinner;
+			}
+		}
+		for (int reihenIndex = 0; reihenIndex < reihen.length - 4; reihenIndex ++ ) {
+			List <Spieler> dieseReihe = reihen[reihenIndex];
+			for (int gewinnerIndex = 0; gewinnerIndex < dieseReihe.size(); gewinnerIndex ++ ) {
+				Spieler gewinner = dieseReihe.get(gewinnerIndex);
+				List <Spieler> reihe = reihen[reihenIndex + 1];
+				if (reihe.size() <= gewinnerIndex || gewinner != reihe.get(gewinnerIndex)) {
+					continue;
+				}
+				reihe = reihen[reihenIndex + 2];
+				if (reihe.size() <= gewinnerIndex || gewinner != reihe.get(gewinnerIndex)) {
+					continue;
+				}
+				reihe = reihen[reihenIndex + 3];
+				if (reihe.size() <= gewinnerIndex || gewinner != reihe.get(gewinnerIndex)) {
+					continue;
+				}
+				return gewinner;
+			}
+		}
 		return null;
 	}
 	
