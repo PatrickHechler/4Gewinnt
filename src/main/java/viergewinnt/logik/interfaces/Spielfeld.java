@@ -8,4 +8,10 @@ public interface Spielfeld {
 	
 	Spieler ergebnis();
 	
+	Spieler[][] alleReihen();
+	
+	Spieler[] reihe(int i);
+	
+	int reihenAnzahl();
+	
 }
