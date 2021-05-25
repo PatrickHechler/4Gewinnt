@@ -22,8 +22,8 @@ class SpielfeldImplTest {
 	void setUp() throws Exception {
 		sf = new SpielfeldImpl(REIHEN_ANZAHL, MAX_GRÖSSE);
 		//@formatter:off
-		s1 = new Spieler() { @Override public int zugMachen() { return -1; } };
-		s2 = new Spieler() { @Override public int zugMachen() { return -1; } };
+		s1 = new Spieler() { @Override public int zugMachen() { return -1; } @Override public boolean hatSichEntschieden() {return false;} };
+		s2 = new Spieler() { @Override public int zugMachen() { return -1; } @Override public boolean hatSichEntschieden() {return false;} };
 		//@formatter:on
 	}
 	
@@ -137,7 +137,7 @@ class SpielfeldImplTest {
 	
 	//@formatter:off
 	private Spieler newSpieler() {
-		return new Spieler() { @Override public int zugMachen() { return 0; } };
+		return new Spieler() { @Override public int zugMachen() { return 0; } @Override public boolean hatSichEntschieden() { return false; }};
 	}
 	//@formatter:on
 	
