@@ -413,6 +413,137 @@ class SpielfeldImplTest {
 		}
 	}
 	
+	@Test
+	//@formatter:off
+	void testAlleReihen() {
+		assertArrayEquals(new Spieler[REIHEN_ANZAHL][0], sf.alleReihen());
+		sf.steinEinwerfen(s1, 4);
+		assertArrayEquals(new Spieler[][] {
+			{},
+			{},
+			{},
+			{},
+			{s1},
+		}, sf.alleReihen());
+		sf.steinEinwerfen(s2, 3);
+		assertArrayEquals(new Spieler[][] {
+			{},
+			{},
+			{},
+			{s2},
+			{s1},
+		}, sf.alleReihen());
+		sf.steinEinwerfen(s1, 2);
+		assertArrayEquals(new Spieler[][] {
+			{},
+			{},
+			{s1},
+			{s2},
+			{s1},
+		}, sf.alleReihen());
+		sf.steinEinwerfen(s1, 1);
+		assertArrayEquals(new Spieler[][] {
+			{},
+			{s1},
+			{s1},
+			{s2},
+			{s1},
+		}, sf.alleReihen());
+		sf.steinEinwerfen(s1, 0);
+		assertArrayEquals(new Spieler[][] {
+			{s1},
+			{s1},
+			{s1},
+			{s2},
+			{s1},
+		}, sf.alleReihen());
+		sf.steinEinwerfen(s2, 0);
+		assertArrayEquals(new Spieler[][] {
+			{s1,s2},
+			{s1},
+			{s1},
+			{s2},
+			{s1},
+		}, sf.alleReihen());
+		sf.steinEinwerfen(s2, 0);
+		assertArrayEquals(new Spieler[][] {
+			{s1,s2,s2},
+			{s1},
+			{s1},
+			{s2},
+			{s1},
+		}, sf.alleReihen());
+		sf.steinEinwerfen(s2, 0);
+		assertArrayEquals(new Spieler[][] {
+			{s1,s2,s2,s2},
+			{s1},
+			{s1},
+			{s2},
+			{s1},
+		}, sf.alleReihen());
+		sf.steinEinwerfen(s1, 0);
+		assertArrayEquals(new Spieler[][] {
+			{s1,s2,s2,s2,s1},
+			{s1},
+			{s1},
+			{s2},
+			{s1},
+		}, sf.alleReihen());
+	}
+	//@formatter:on
+	
+	@Test
+	void testReihe() {
+		// Spieler[] reihe(int i);
+		testReihen(new Spieler[REIHEN_ANZAHL][0]);
+		sf.steinEinwerfen(s1, 4);
+		testReihen(new Spieler[][] {{}, {}, {}, {}, {s1 }, });
+		sf.steinEinwerfen(s2, 3);
+		testReihen(new Spieler[][] {{}, {}, {}, {s2 }, {s1 }, });
+		sf.steinEinwerfen(s1, 2);
+		testReihen(new Spieler[][] {{}, {}, {s1 }, {s2 }, {s1 }, });
+		sf.steinEinwerfen(s1, 1);
+		testReihen(new Spieler[][] {{}, {s1 }, {s1 }, {s2 }, {s1 }, });
+		sf.steinEinwerfen(s1, 0);
+		testReihen(new Spieler[][] {{s1 }, {s1 }, {s1 }, {s2 }, {s1 }, });
+		sf.steinEinwerfen(s2, 0);
+		testReihen(new Spieler[][] {{s1, s2 }, {s1 }, {s1 }, {s2 }, {s1 }, });
+		sf.steinEinwerfen(s2, 0);
+		testReihen(new Spieler[][] {{s1, s2, s2 }, {s1 }, {s1 }, {s2 }, {s1 }, });
+		sf.steinEinwerfen(s2, 0);
+		testReihen(new Spieler[][] {{s1, s2, s2, s2 }, {s1 }, {s1 }, {s2 }, {s1 }, });
+		sf.steinEinwerfen(s1, 0);
+		testReihen(new Spieler[][] {{s1, s2, s2, s2, s1 }, {s1 }, {s1 }, {s2 }, {s1 }, });
+	}
+	
+	private void testReihen(Spieler[][] spieler) {
+		for (int index = 0; index < spieler.length; index ++ ) {
+			assertArrayEquals(spieler[index], sf.reihe(index));
+		}
+	}
+	
+	@Test
+	void testReihenAnzahl() {
+		assertEquals(REIHEN_ANZAHL, sf.reihenAnzahl());
+		for (int reihenAnzahl = 0; reihenAnzahl < 100; reihenAnzahl ++ ) {
+			for (int maxGr = 0; maxGr < 10; maxGr ++ ) {
+				sf = new SpielfeldImpl(reihenAnzahl, maxGr);
+				assertEquals(reihenAnzahl, sf.reihenAnzahl());
+			}
+		}
+	}
+	
+	@Test
+	void testMaximaleReihenGröße() {
+		assertEquals(MAX_GRÖSSE, sf.maximaleReihenGröße());
+		for (int maxGr = 0; maxGr < 100; maxGr ++ ) {
+			for (int reihenAnzahl = 0; reihenAnzahl < 10; reihenAnzahl ++ ) {
+				sf = new SpielfeldImpl(reihenAnzahl, maxGr);
+				assertEquals(maxGr, sf.maximaleReihenGröße());
+			}
+		}
+	}
+	
 	private void reihenTesten(int magGr, int reihenAnz) {
 		assertThrows(IndexOutOfBoundsException.class, () -> sf.steinEinwerfen(s1, -1));
 		for (int ii = 0; ii < reihenAnz; ii ++ ) {

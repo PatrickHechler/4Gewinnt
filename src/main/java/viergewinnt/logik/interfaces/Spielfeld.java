@@ -14,4 +14,6 @@ public interface Spielfeld {
 	
 	int reihenAnzahl();
 	
+	int maximaleReihenGröße();
+	
 }

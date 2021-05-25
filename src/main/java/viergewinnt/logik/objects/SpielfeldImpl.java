@@ -129,26 +129,29 @@ public class SpielfeldImpl implements Spielfeld {
 		}
 		return null;
 	}
-
+	
 	@Override
 	public Spieler[][] alleReihen() {
 		Spieler[][] alle = new Spieler[reihen.length][];
-		for (int i = 0; i < reihen.length; i ++ ) {
-			//TODO
+		for (int index = 0; index < reihen.length; index ++ ) {
+			alle[index] = reihen[index].toArray(new Spieler[reihen[index].size()]);
 		}
-		return null;
+		return alle;
 	}
-
+	
 	@Override
-	public Spieler[] reihe(int i) {
-		// TODO Auto-generated method stub
-		return null;
+	public Spieler[] reihe(int index) {
+		return reihen[index].toArray(new Spieler[reihen[index].size()]);
 	}
-
+	
 	@Override
 	public int reihenAnzahl() {
-		// TODO Auto-generated method stub
-		return 0;
+		return reihen.length;
+	}
+	
+	@Override
+	public int maximaleReihenGröße() {
+		return maxReihenGröße;
 	}
 	
 }
