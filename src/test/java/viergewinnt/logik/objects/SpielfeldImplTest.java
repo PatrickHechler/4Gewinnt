@@ -4,8 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.*;
 
-import viergewinnt.logik.interfaces.Spieler;
-import viergewinnt.logik.interfaces.Spielfeld;
+import viergewinnt.model.interfaces.Spieler;
+import viergewinnt.model.interfaces.Spielfeld;
+import viergewinnt.model.objects.SpielfeldImpl;
 
 
 class SpielfeldImplTest {

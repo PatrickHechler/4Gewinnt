@@ -1,10 +1,10 @@
-package viergewinnt.logik.objects;
+package viergewinnt.model.objects;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import viergewinnt.logik.interfaces.Spieler;
-import viergewinnt.logik.interfaces.Spielfeld;
+import viergewinnt.model.interfaces.Spieler;
+import viergewinnt.model.interfaces.Spielfeld;
 
 
 public class SpielfeldImpl implements Spielfeld {
