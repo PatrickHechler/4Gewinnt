@@ -2,9 +2,7 @@ package viergewinnt.model.interfaces;
 
 public interface Spieler {
 	
-	default Object lock() {
-		return this;
-	}
+	Object lock();
 	
 	boolean hatSichEntschieden();
 	

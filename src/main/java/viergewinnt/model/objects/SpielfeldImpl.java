@@ -9,8 +9,8 @@ import viergewinnt.model.interfaces.Spielfeld;
 
 public class SpielfeldImpl implements Spielfeld {
 	
-	private static final int DEFAULT_REIHEN_ANZAHL = 5;
-	private static final int DEFAULT_MAX_REIHEN_GRÖẞE = 5;
+	private static final int DEFAULT_REIHEN_ANZAHL = 7;
+	private static final int DEFAULT_MAX_REIHEN_GRÖẞE = 6;
 	
 	
 	

@@ -22,8 +22,8 @@ class SpielfeldImplTest {
 	void setUp() throws Exception {
 		sf = new SpielfeldImpl(REIHEN_ANZAHL, MAX_GRÖSSE);
 		//@formatter:off
-		s1 = new Spieler() { @Override public int zugMachen() { return -1; } @Override public boolean hatSichEntschieden() {return false;} };
-		s2 = new Spieler() { @Override public int zugMachen() { return -1; } @Override public boolean hatSichEntschieden() {return false;} };
+		s1 = new Spieler() { @Override public int zugMachen() { return -1; } @Override public boolean hatSichEntschieden() {return false;} @Override public Object lock() {return null;} };
+		s2 = new Spieler() { @Override public int zugMachen() { return -1; } @Override public boolean hatSichEntschieden() {return false;} @Override public Object lock() {return null;} };
 		//@formatter:on
 	}
 	
@@ -137,7 +137,7 @@ class SpielfeldImplTest {
 	
 	//@formatter:off
 	private Spieler newSpieler() {
-		return new Spieler() { @Override public int zugMachen() { return 0; } @Override public boolean hatSichEntschieden() { return false; }};
+		return new Spieler() { @Override public int zugMachen() { return 0; } @Override public boolean hatSichEntschieden() { return false; } @Override public Object lock() {return null; } };
 	}
 	//@formatter:on
 	
@@ -398,16 +398,6 @@ class SpielfeldImplTest {
 	void testSteinEinwerfenDiffrentSizes() {
 		for (int reihenAnz = 0; reihenAnz < 25; reihenAnz ++ ) {
 			for (int maxGrr = 0; maxGrr < 25; maxGrr ++ ) {
-				sf = new SpielfeldImpl(reihenAnz, maxGrr);
-				reihenTesten(maxGrr, reihenAnz);
-			}
-		}
-	}
-	
-	@Test
-	void testSteinEinwerfenDiffrentHugeSizes() {
-		for (int reihenAnz = 0; reihenAnz < 100; reihenAnz ++ ) {
-			for (int maxGrr = 0; maxGrr < 100; maxGrr ++ ) {
 				sf = new SpielfeldImpl(reihenAnz, maxGrr);
 				reihenTesten(maxGrr, reihenAnz);
 			}
