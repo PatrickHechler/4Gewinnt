@@ -18,6 +18,7 @@ public class Gui4GewinntImpl implements Gui4Gewinnt, ButtonClickListener {
 	public Gui4GewinntImpl(Spielfeld sf) {
 		this.sf = sf;
 		this.fenster = new GuiFenster(this).load(sf, this);
+		this.reihe = -1;
 	}
 	
 	
@@ -30,6 +31,7 @@ public class Gui4GewinntImpl implements Gui4Gewinnt, ButtonClickListener {
 	@Override
 	public int zugMachen() {
 		int ret = reihe;
+		fenster.setTitle("WARTE");
 		reihe = -1;
 		return ret;
 	}
@@ -53,11 +55,20 @@ public class Gui4GewinntImpl implements Gui4Gewinnt, ButtonClickListener {
 	@Override
 	public void clicked(int reihe) {
 		this.reihe = reihe;
+		Object lock = lock();
+		synchronized (lock) {
+			lock.notifyAll();
+		}
 	}
 	
 	@Override
 	public Object lock() {
 		return this;
+	}
+	
+	@Override
+	public void zugBeginnt() {
+		fenster.setTitle("DEIN ZUG");
 	}
 	
 }

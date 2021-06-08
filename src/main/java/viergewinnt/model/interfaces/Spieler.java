@@ -8,4 +8,6 @@ public interface Spieler {
 	
 	int zugMachen();
 	
+	void zugBeginnt();
+	
 }
