@@ -1,5 +1,7 @@
 package viergewinnt.view.objects.helps;
 
+import java.awt.Image;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -32,10 +34,13 @@ public class GuiFenster extends JFrame {
 	
 	public GuiFenster load(Spielfeld sf, ButtonClickListener bcl) {
 		synchronized (GuiFenster.class) {
-			if (leer != null) {
-				leer = new ImageIcon(getClass().getResource("./leeresFeld.png"));
-				gelb = new ImageIcon(getClass().getResource("./gelbesFeld.png"));
-				rot = new ImageIcon(getClass().getResource("./rotesFeld.png"));
+			if (leer == null) {
+				ImageIcon zw = new ImageIcon(getClass().getResource("/leeresFeld.png"));
+				leer = new ImageIcon(zw.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+				zw = new ImageIcon(getClass().getResource("/gelbesFeld.png"));
+				gelb = new ImageIcon(zw.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+				zw = new ImageIcon(getClass().getResource("/rotesFeld.png"));
+				rot = new ImageIcon(zw.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 			}
 		}
 		
@@ -51,7 +56,9 @@ public class GuiFenster extends JFrame {
 				final int y = ii;
 				felder[x][y] = new JButton();
 				felder[x][y].setBounds(x * 50, (felder[0].length - y) * 50 - 50, 50, 50);
-				felder[x][y].addActionListener(e -> bcl.clicked(x));
+				felder[x][y].addActionListener(e -> {
+					bcl.clicked(x);
+				});
 				add(felder[x][y]);
 				setzteFeld(x, y, null);
 			}
@@ -65,9 +72,7 @@ public class GuiFenster extends JFrame {
 	public static void main(String[] args) {
 		SpielfeldImpl spielfeldImpl = new SpielfeldImpl();
 		Gui4GewinntImpl spieler1 = new Gui4GewinntImpl(spielfeldImpl);
-		GuiFenster gf1 = new GuiFenster(spieler1).load(spielfeldImpl, spieler1);
 		Gui4GewinntImpl spieler2 = new Gui4GewinntImpl(spielfeldImpl);
-		GuiFenster gf2 = new GuiFenster(spieler1).load(spielfeldImpl, spieler1);
 		spielfeldImpl.steinEinwerfen(spieler1, 4);
 		spielfeldImpl.steinEinwerfen(spieler2, 4);
 		spieler1.repaint();
@@ -77,11 +82,18 @@ public class GuiFenster extends JFrame {
 	public void setzteFeld(int reihenIndex, int spielerIndex, Spieler spieler) {
 		JButton setzte = felder[reihenIndex][spielerIndex];
 		if (spieler == null) {
+			setzte.setEnabled(true);
 			setzte.setIcon(leer);
-		} else if (spieler == ich) {
-			setzte.setIcon(gelb);
+			setzte.setDisabledIcon(leer);
 		} else {
-			setzte.setIcon(rot);
+			setzte.setEnabled(false);
+			if (spieler == ich) {
+				setzte.setIcon(gelb);
+				setzte.setDisabledIcon(gelb);
+			} else {
+				setzte.setIcon(rot);
+				setzte.setDisabledIcon(rot);
+			}
 		}
 	}
 	

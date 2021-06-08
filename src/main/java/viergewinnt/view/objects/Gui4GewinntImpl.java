@@ -44,7 +44,7 @@ public class Gui4GewinntImpl implements Gui4Gewinnt, ButtonClickListener {
 				fenster.setzteFeld(reihenIndex, spielerIndex, alles[reihenIndex][spielerIndex]);
 			}
 			for (; spielerIndex < maxReihenGröße; spielerIndex ++ ) {
-				
+				fenster.setzteFeld(reihenIndex, spielerIndex, null);
 			}
 		}
 		fenster.repaint();
