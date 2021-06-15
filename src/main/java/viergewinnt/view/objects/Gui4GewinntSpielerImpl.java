@@ -1,9 +1,8 @@
 package viergewinnt.view.objects;
 
-import viergewinnt.model.interfaces.Spieler;
 import viergewinnt.model.interfaces.Spielfeld;
 import viergewinnt.view.interfaces.ButtonClickListener;
-import viergewinnt.view.objects.helps.GuiFenster;
+import viergewinnt.view.interfaces.Spieler;
 
 
 public class Gui4GewinntSpielerImpl implements Spieler, ButtonClickListener {

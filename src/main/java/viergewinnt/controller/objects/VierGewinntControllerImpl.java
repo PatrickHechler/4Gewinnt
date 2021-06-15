@@ -1,8 +1,9 @@
-package viergewinnt.controller.interfaces;
+package viergewinnt.controller.objects;
 
-import viergewinnt.model.interfaces.Spieler;
+import viergewinnt.controller.interfaces.VierGewinntController;
 import viergewinnt.model.interfaces.Spielfeld;
 import viergewinnt.model.objects.SpielfeldImpl;
+import viergewinnt.view.interfaces.Spieler;
 import viergewinnt.view.objects.Gui4GewinntSpielerImpl;
 
 public class VierGewinntControllerImpl implements VierGewinntController {

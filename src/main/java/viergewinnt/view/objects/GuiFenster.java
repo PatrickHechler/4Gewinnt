@@ -1,4 +1,4 @@
-package viergewinnt.view.objects.helps;
+package viergewinnt.view.objects;
 
 import java.awt.Image;
 
@@ -8,11 +8,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import viergewinnt.model.interfaces.Spieler;
 import viergewinnt.model.interfaces.Spielfeld;
 import viergewinnt.model.objects.SpielfeldImpl;
 import viergewinnt.view.interfaces.ButtonClickListener;
-import viergewinnt.view.objects.Gui4GewinntSpielerImpl;
+import viergewinnt.view.interfaces.Spieler;
 
 
 public class GuiFenster extends JFrame {

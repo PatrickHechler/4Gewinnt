@@ -3,8 +3,8 @@ package viergewinnt.model.objects;
 import java.util.ArrayList;
 import java.util.List;
 
-import viergewinnt.model.interfaces.Spieler;
 import viergewinnt.model.interfaces.Spielfeld;
+import viergewinnt.view.interfaces.Spieler;
 
 
 public class SpielfeldImpl implements Spielfeld {

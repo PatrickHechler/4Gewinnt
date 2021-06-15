@@ -1,7 +1,7 @@
 package viergewinnt.controller.interfaces;
 
-import viergewinnt.model.interfaces.Spieler;
 import viergewinnt.model.interfaces.Spielfeld;
+import viergewinnt.view.interfaces.Spieler;
 
 /**
  * Der {@link VierGewinntController} bildet die Brücke von der {@link Spieler view} und dem {@link Spielfeld model}

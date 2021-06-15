@@ -1,5 +1,7 @@
 package viergewinnt.model.interfaces;
 
+import viergewinnt.view.interfaces.Spieler;
+
 public interface Spielfeld {
 	
 	void steinEinwerfen(Spieler spieler, int reihe);

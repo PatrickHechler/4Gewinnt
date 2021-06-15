@@ -1,4 +1,4 @@
-package viergewinnt.model.interfaces;
+package viergewinnt.view.interfaces;
 
 public interface Spieler {
 	
