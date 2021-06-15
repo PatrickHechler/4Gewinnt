@@ -3,11 +3,10 @@ package viergewinnt.view.objects;
 import viergewinnt.model.interfaces.Spieler;
 import viergewinnt.model.interfaces.Spielfeld;
 import viergewinnt.view.interfaces.ButtonClickListener;
-import viergewinnt.view.interfaces.Gui4Gewinnt;
 import viergewinnt.view.objects.helps.GuiFenster;
 
 
-public class Gui4GewinntImpl implements Gui4Gewinnt, ButtonClickListener {
+public class Gui4GewinntSpielerImpl implements Spieler, ButtonClickListener {
 	
 	private final Spielfeld sf;
 	private final GuiFenster fenster;
@@ -15,9 +14,9 @@ public class Gui4GewinntImpl implements Gui4Gewinnt, ButtonClickListener {
 	
 	
 	
-	public Gui4GewinntImpl(Spielfeld sf) {
+	public Gui4GewinntSpielerImpl(Spielfeld sf) {
 		this.sf = sf;
-		this.fenster = new GuiFenster(this).load(sf, this);
+		this.fenster = new GuiFenster(this).load(sf, this, "WARTE");
 		this.reihe = -1;
 	}
 	
@@ -31,13 +30,16 @@ public class Gui4GewinntImpl implements Gui4Gewinnt, ButtonClickListener {
 	@Override
 	public int zugMachen() {
 		int ret = reihe;
+		if (ret == -1) {
+			throw new IllegalStateException("ich habe mich noch nicht entschieden!");
+		}
 		fenster.setTitle("WARTE");
 		reihe = -1;
 		return ret;
 	}
 	
 	@Override
-	public void repaint() {
+	public void rebuild() {
 		Spieler[][] alles = sf.alleReihen();
 		int maxReihenGröße = sf.maximaleReihenGröße();
 		for (int reihenIndex = 0; reihenIndex < alles.length; reihenIndex ++ ) {
@@ -51,7 +53,7 @@ public class Gui4GewinntImpl implements Gui4Gewinnt, ButtonClickListener {
 		}
 		fenster.repaint();
 	}
-
+	
 	@Override
 	public void clicked(int reihe) {
 		this.reihe = reihe;
@@ -69,6 +71,21 @@ public class Gui4GewinntImpl implements Gui4Gewinnt, ButtonClickListener {
 	@Override
 	public void zugBeginnt() {
 		fenster.setTitle("DEIN ZUG");
+	}
+	
+	@Override
+	public void gewonnen() {
+		new Thread(() -> fenster.gewonnen()).start();
+	}
+	
+	@Override
+	public void verloren() {
+		new Thread(() -> fenster.verloren()).start();
+	}
+	
+	@Override
+	public void unentschieden() {
+		new Thread(() -> fenster.unentschieden()).start();
 	}
 	
 }

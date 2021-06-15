@@ -22,8 +22,8 @@ class SpielfeldImplTest {
 	void setUp() throws Exception {
 		sf = new SpielfeldImpl(REIHEN_ANZAHL, MAX_GRÖSSE);
 		//@formatter:off
-		s1 = new Spieler() { @Override public int zugMachen() { return -1; } @Override public boolean hatSichEntschieden() {return false;} @Override public Object lock() {return null;} @Override public void zugBeginnt() {}};
-		s2 = new Spieler() { @Override public int zugMachen() { return -1; } @Override public boolean hatSichEntschieden() {return false;} @Override public Object lock() {return null;} @Override public void zugBeginnt() {}};
+		s1 = new Spieler() { @Override public int zugMachen() { return -1; } @Override public boolean hatSichEntschieden() {return false;} @Override public Object lock() {return null;} @Override public void zugBeginnt() {} @Override public void rebuild() {} @Override public void gewonnen() {} @Override public void verloren() {} @Override public void unentschieden() {}};
+		s2 = new Spieler() { @Override public int zugMachen() { return -1; } @Override public boolean hatSichEntschieden() {return false;} @Override public Object lock() {return null;} @Override public void zugBeginnt() {} @Override public void rebuild() {} @Override public void gewonnen() {} @Override public void verloren() {} @Override public void unentschieden() {}};
 		//@formatter:on
 	}
 	
@@ -137,7 +137,7 @@ class SpielfeldImplTest {
 	
 	//@formatter:off
 	private Spieler newSpieler() {
-		return new Spieler() { @Override public int zugMachen() { return -1; } @Override public boolean hatSichEntschieden() {return false;} @Override public Object lock() {return null;} @Override public void zugBeginnt() {}};
+		return new Spieler() { @Override public int zugMachen() { return -1; } @Override public boolean hatSichEntschieden() {return false;} @Override public Object lock() {return null;} @Override public void zugBeginnt() {} @Override public void rebuild() {} @Override public void gewonnen() {} @Override public void verloren() {} @Override public void unentschieden() {}};
 	}
 	//@formatter:on
 	

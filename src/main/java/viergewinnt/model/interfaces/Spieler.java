@@ -10,4 +10,12 @@ public interface Spieler {
 	
 	void zugBeginnt();
 	
+	void rebuild();
+	
+	void gewonnen();
+	
+	void verloren();
+	
+	void unentschieden();
+	
 }
