@@ -9,7 +9,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import viergewinnt.model.interfaces.Spielfeld;
-import viergewinnt.model.objects.SpielfeldImpl;
 import viergewinnt.view.interfaces.ButtonClickListener;
 import viergewinnt.view.interfaces.Spieler;
 
