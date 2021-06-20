@@ -72,18 +72,8 @@ public class GuiFenster extends JFrame {
 		return this;
 	}
 	
-	public static void main(String[] args) {
-		SpielfeldImpl spielfeldImpl = new SpielfeldImpl();
-		Gui4GewinntSpielerImpl spieler1 = new Gui4GewinntSpielerImpl(spielfeldImpl);
-		Gui4GewinntSpielerImpl spieler2 = new Gui4GewinntSpielerImpl(spielfeldImpl);
-		spielfeldImpl.steinEinwerfen(spieler1, 4);
-		spielfeldImpl.steinEinwerfen(spieler2, 4);
-		spieler1.rebuild();
-		spieler2.rebuild();
-	}
-	
-	public void setzteFeld(int reihenIndex, int spielerIndex, Spieler spieler) {
-		JButton setzte = felder[reihenIndex][spielerIndex];
+	public void setzteFeld(int reihenIndex, int spaltenIndex, Spieler spieler) {
+		JButton setzte = felder[reihenIndex][spaltenIndex];
 		if (spieler == null) {
 			setzte.setEnabled(true);
 			setzte.setIcon(leer);

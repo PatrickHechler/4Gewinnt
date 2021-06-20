@@ -124,7 +124,7 @@ public class VierGewinntControllerImpl implements VierGewinntController {
 	
 	public static void main(String[] args) {
 		new VierGewinntControllerImpl().run();
-		System.err.println("FINISH");
+		System.out.println("FINISH");
 	}
 	
 }
