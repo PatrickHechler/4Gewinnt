@@ -37,7 +37,7 @@ public class SpielfeldImpl implements Spielfeld {
 	
 	@Override
 	public void steinEinwerfen(Spieler spieler, int reihe) throws IndexOutOfBoundsException, RuntimeException {
-		if (reihe < 0 || reihe >= this.reihen.length) throw new IndexOutOfBoundsException(reihe);
+		if (reihe < 0 || reihe >= this.reihen.length) throw new IndexOutOfBoundsException("reihe=" + reihe + " reihenanzahl=" + reihen.length);
 		List <Spieler> dieseReihe = reihen[reihe];
 		if (dieseReihe.size() < maxReihenGröße) dieseReihe.add(spieler);
 		else throw new RuntimeException("bereits die maximale größe erreicht: reihe=" + reihe + " reihen[reihe]=" + dieseReihe + " maxReihenGröße=" + maxReihenGröße);

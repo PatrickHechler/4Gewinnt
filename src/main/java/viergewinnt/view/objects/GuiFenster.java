@@ -1,6 +1,7 @@
 package viergewinnt.view.objects;
 
 import java.awt.Image;
+import java.net.URL;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -35,13 +36,23 @@ public class GuiFenster extends JFrame {
 	public GuiFenster load(Spielfeld sf, ButtonClickListener bcl, String title) {
 		synchronized (GuiFenster.class) {
 			if (leer == null) {
-				ImageIcon zw = new ImageIcon(getClass().getResource("/leeresFeld.png"));
+				URL res = getClass().getResource("/leeresFeld.png");
+				String prefix = "";
+				if (res == null) {
+					res = getClass().getResource("/resources/leeresFeld.png");
+					prefix = "/resources";
+				}
+				System.err.println("prefix='" + prefix + "'");
+				ImageIcon zw = new ImageIcon(res);
 				leer = new ImageIcon(zw.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-				zw = new ImageIcon(getClass().getResource("/gelbesFeld.png"));
+				res = getClass().getResource(prefix + "/gelbesFeld.png");
+				zw = new ImageIcon(res);
 				gelb = new ImageIcon(zw.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-				zw = new ImageIcon(getClass().getResource("/rotesFeld.png"));
+				res = getClass().getResource(prefix + "/rotesFeld.png");
+				zw = new ImageIcon(res);
 				rot = new ImageIcon(zw.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-				zw = new ImageIcon(getClass().getResource("/rotGelbFeld.png"));
+				res = getClass().getResource(prefix + "/rotGelbFeld.png");
+				zw = new ImageIcon(res);
 				rotGelb = new ImageIcon(zw.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 			}
 		}
@@ -58,9 +69,7 @@ public class GuiFenster extends JFrame {
 				final int y = ii;
 				felder[x][y] = new JButton();
 				felder[x][y].setBounds(x * 50, (felder[0].length - y) * 50 - 50, 50, 50);
-				felder[x][y].addActionListener(e -> {
-					bcl.clicked(x);
-				});
+				felder[x][y].addActionListener(e -> bcl.clicked(x));
 				add(felder[x][y]);
 				setzteFeld(x, y, null);
 			}
@@ -102,6 +111,10 @@ public class GuiFenster extends JFrame {
 	public void unentschieden() {
 		setTitle("UNENTSCHIEDEN");
 		JOptionPane.showMessageDialog(this, "Das war ein unentschieden!", "UNENTSCHIEDEN", JOptionPane.INFORMATION_MESSAGE, rotGelb);
+	}
+	
+	public void nichtAmZugMeldung() {
+		JOptionPane.showMessageDialog(this, "du bist noch nicht dran!\nHetz den Feind doch nicht so!", "WARTE", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 }

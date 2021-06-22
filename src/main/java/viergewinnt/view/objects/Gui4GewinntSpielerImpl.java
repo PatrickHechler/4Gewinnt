@@ -10,6 +10,7 @@ public class Gui4GewinntSpielerImpl implements Spieler, ButtonClickListener {
 	private final Spielfeld sf;
 	private final GuiFenster fenster;
 	private volatile int reihe;
+	private volatile boolean amZug;
 	
 	
 	
@@ -28,6 +29,7 @@ public class Gui4GewinntSpielerImpl implements Spieler, ButtonClickListener {
 	
 	@Override
 	public int zugMachen() {
+		amZug = false;
 		int ret = reihe;
 		if (ret == -1) {
 			throw new IllegalStateException("ich habe mich noch nicht entschieden!");
@@ -55,10 +57,14 @@ public class Gui4GewinntSpielerImpl implements Spieler, ButtonClickListener {
 	
 	@Override
 	public void clicked(int reihe) {
-		this.reihe = reihe;
-		Object lock = lock();
-		synchronized (lock) {
-			lock.notifyAll();
+		if (amZug) {
+			this.reihe = reihe;
+			Object lock = lock();
+			synchronized (lock) {
+				lock.notifyAll();
+			}
+		} else {
+			new Thread(fenster::nichtAmZugMeldung).start();
 		}
 	}
 	
@@ -69,6 +75,7 @@ public class Gui4GewinntSpielerImpl implements Spieler, ButtonClickListener {
 	
 	@Override
 	public void zugBeginnt() {
+		amZug = true;
 		fenster.setTitle("DEIN ZUG");
 	}
 	
